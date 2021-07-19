@@ -19,7 +19,12 @@ const typeDefs = gql`
       description: String!
     ): Book
     removeBookById(id: ID!): Book
-    updateBook(title: String!, author: String!, description: String!): Book
+    updateBook(
+      id: ID!
+      title: String!
+      author: String!
+      description: String!
+    ): [Book]
   }
   schema {
     query: Query
@@ -32,7 +37,7 @@ const books = [
     id: uuidv4(),
     title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
-    description: 'testing shit',
+    description: 'This is a demo graphQL project',
   },
   {
     id: uuidv4(),
@@ -42,14 +47,8 @@ const books = [
   },
   {
     id: uuidv4(),
-    title: 'test book',
-    author: 'Moses west',
-    description: 'This is a demo graphQL project',
-  },
-  {
-    id: uuidv4(),
     title: 'Awesome book',
-    author: 'Alex Kislov',
+    author: 'Moses west',
     description: 'This is a demo graphQL project',
   },
 ];
@@ -62,6 +61,9 @@ function save({ id, title, author, description }) {
 
 function remove({ id }) {
   const indx = books.findIndex(book => book.id === id);
+  if (indx < 0) {
+    return;
+  }
   const removedBook = {
     id: books[indx].id,
     title: books[indx].title,
@@ -73,13 +75,15 @@ function remove({ id }) {
   return removedBook;
 }
 
-function update({ title, author, description }) {
-  return {
-    id: 'a0a8a803-5480-44a9-91ef-386bf0b041f2',
-    title,
-    author,
-    description,
-  };
+function update({ id, title, author, description }) {
+  const indx = books.findIndex(book => book.id === id);
+  if (indx < 0) {
+    return;
+  }
+  books[indx].title = title;
+  books[indx].author = author;
+  books[indx].description = description;
+  return books;
 }
 
 const resolvers = {
@@ -93,8 +97,8 @@ const resolvers = {
     removeBookById: async (_, { id }) => {
       return await remove({ id });
     },
-    updateBook: async (_, { title, author, description }) => {
-      return await update({ title, author, description });
+    updateBook: async (_, { id, title, author, description }) => {
+      return await update({ id, title, author, description });
     },
   },
 };
