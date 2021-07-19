@@ -61,7 +61,7 @@ function save({ id, title, author, description }) {
 }
 
 function remove({ id }) {
-  const indx = books.findIndex(book => book.title.id === id);
+  const indx = books.findIndex(book => book.id === id);
   const removedBook = {
     id: books[indx].id,
     title: books[indx].title,
@@ -90,8 +90,8 @@ const resolvers = {
     createBook: async (_, { id, title, author, description }) => {
       return await save({ id, title, author, description });
     },
-    removeBookById: async (_, { title }) => {
-      return await remove({ title });
+    removeBookById: async (_, { id }) => {
+      return await remove({ id });
     },
     updateBook: async (_, { title, author, description }) => {
       return await update({ title, author, description });
