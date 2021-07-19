@@ -18,7 +18,7 @@ const typeDefs = gql`
       author: String!
       description: String!
     ): Book
-    removeBookById(id: ID!): Book
+    removeBookById(id: ID!): [Book]
     updateBook(
       id: ID!
       title: String!
@@ -64,15 +64,10 @@ function remove({ id }) {
   if (indx < 0) {
     return;
   }
-  const removedBook = {
-    id: books[indx].id,
-    title: books[indx].title,
-    author: books[indx].author,
-    description: books[indx].description,
-  };
+
   books.splice(indx, 1);
 
-  return removedBook;
+  return books;
 }
 
 function update({ id, title, author, description }) {
