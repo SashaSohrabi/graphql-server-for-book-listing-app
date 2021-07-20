@@ -37,19 +37,22 @@ const books = [
     id: uuidv4(),
     title: 'Harry Potter and the Chamber of Secrets',
     author: 'J.K. Rowling',
-    description: 'This is a demo graphQL project',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, fuga quas debitis aliquam quidem esse facere cupiditate, aspernatur, laboriosam ex alias optio maiores.',
   },
   {
     id: uuidv4(),
     title: 'Jurassic Park',
     author: 'Michael Crichton',
-    description: 'Shit is getting real',
+    description:
+      'Praesentium est nemo quidem, dicta obcaecati libero optio. At eum libero aperiam iste eligendi dignissimos incidunt, laboriosam culpa vitae reiciendis, in perspiciatis.',
   },
   {
     id: uuidv4(),
     title: 'Awesome book',
     author: 'Moses west',
-    description: 'This is a demo graphQL project',
+    description:
+      'Doloribus dignissimos ad soluta ut possimus corporis alias unde facere! Quisquam officiis mollitia velit at soluta maxime non, labore voluptas optio recusandae.',
   },
 ];
 
